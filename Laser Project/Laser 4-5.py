@@ -81,14 +81,18 @@ def calc_path(start_x, start_y, start_vx, start_vy, grid, cur_grid):
             vy = 0
             vx = 0
         else:
+            # we now introduce a new laser from this refract block. Its first element
+            # will tell which refract block it belongs to. (The original laser will have
+            # this element of 0, thus the "created lsr" will have block's index + 1)
+            refract.lsr = [[refract.pos.index([x, y])]]
+            refract.lsr.append(calc_path(x, y, vx, vy, grid, cur_grid))
+            # then reflect the original laser by alter its direction just as reflect blk
             if x - blk_x == 0:
                 vy = -vy
             else:
                 vx = -vx
-            for i,j in C.position
-            C.lsr = []
         x, y = (x + vx, y + vy)
-
+    return path
 
 
 
