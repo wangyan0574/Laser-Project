@@ -1,6 +1,7 @@
 """
 EN.540.635 Software Carpentry
 Laser Project - Maze Generation and Solving
+Yan Wang & Siyu Chen
 """
 from typing import List
 
@@ -95,30 +96,28 @@ def calc_path(start_x, start_y, start_vx, start_vy, grid, cur_grid):
     return path
 
 
-
 class Block:
-    def __init__(self, blktype, position=(None, None)):
+    def __init__(self, total, blktype):
+        self.total = total
+        self.position = []
         self.blktype = blktype
-        self.position = position
-
-
     def get_position(self):
         return self.position
 
-    def set_position(self, x, y):
-        self.position = (x, y)
-
 class Opaque(Block):
+    def __init__(self, total, blktype):
+        Block.__init__(self, total, blktype)
+        self.lsr = []
 
 class Laser:
-    def __init__(self, str_pos, str_dir):
+    def __init__(self, str_xy, str_dir):
         self.str_pos = str_pos
         self.str_dir = str_dir
+        self.CurPath = []
 
-        self.CurPath = ()
     def get_CurPath(self):
         return self.CurPath
-    def set_CurPath(self):
+
 
 
 
