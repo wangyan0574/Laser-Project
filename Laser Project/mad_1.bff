@@ -34,7 +34,7 @@ C 1
 #      |
 #      |
 #     \|/ +y
-#      
+#
 L 2 7 1 -1
 
 # Here we have the points that we need the lazers to intersect
