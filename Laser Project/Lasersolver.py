@@ -65,9 +65,9 @@ def calc_path(start_xy, start_vxvy, cur_grid, refract):
     x, y = start_xy
     vx, vy = start_vxvy
     blk_x, blk_y = get_laserpos((x, y), (x + vx, y + vy))
-    path.append([x,y])
+    path.append([x, y])
     while (in_bound(blk_x, blk_y, cur_grid)) & (vx != 0):
-        #print(blk_x, blk_y)
+
         if cur_grid[blk_y][blk_x] == "A":
             if x == blk_x * 2 + 1:
                 vy = -vy
@@ -88,7 +88,7 @@ def calc_path(start_xy, start_vxvy, cur_grid, refract):
                 vx = -vx
         x, y = (x + vx, y + vy)
         blk_x, blk_y = get_laserpos((x, y), (x + vx, y + vy))
-        path.append([x,y])
+        path.append([x, y])
     return path
 
 
@@ -143,7 +143,7 @@ def solve(ftpr):
             cur_grid = [[c for c in r] for r in str_grid]
             if cur_grid[y][x] == 1:
                 cur_grid[y][x] = b
-                grid = tuple(map(tuple,cur_grid))
+                grid = tuple(map(tuple, cur_grid))
                 combination.add(grid)
     for b in whatsavailable[1:]:
         new_comb = set()
@@ -153,25 +153,10 @@ def solve(ftpr):
                     if cur_grid[y][x] == 1:
                         new_cur_grid = [[c for c in r] for r in cur_grid]
                         new_cur_grid[y][x] = b
-                        new_grid = tuple(map(tuple,new_cur_grid))
+                        new_grid = tuple(map(tuple, new_cur_grid))
                         new_comb.add(new_grid)
         combination = new_comb
-        
-    '''
-    print(len(combination))
-    
-    grid = [['A','B','A'],[1,1,1],['A','C',1]]
-    
-    if grid in combination:
-        print('TRUE')
-    else:
-        print('No')
-    
-    if check_answer(grid, pts, lsr, C):
-        return grid
-    else:
-        return False
-    '''
+
     for grid in combination:
         if check_answer(grid, pts, lsr, C):
             return grid
@@ -184,15 +169,13 @@ def check_answer(cur_grid, pts, lsr, C):
         for j in lsr.Path[i]:
             if j in target:
                 target.remove(j)
-        #print('lsr',lsr.Path[i])
 
     if len(C.lsrPath) != 0:
         for i in C.lsrPath:
             if i in target:
                 target.remove(i)
-        #print('C',C.lsrPath)
-    #print('target',target)
     return len(target) == 0
+
 
 if __name__ == '__main__':
     print(solve("mad_7.bff"))
